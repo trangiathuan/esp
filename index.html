@@ -40,7 +40,6 @@
 
 <body>
     <h1>Điều khiển LED</h1>
-    <p>LED hiện tại: <span id="ledStatus">Đang tắt</span></p>
     <button class="button" onclick="toggleLED('on')">Bật LED</button>
     <button class="button" onclick="toggleLED('off')">Tắt LED</button>
 
@@ -48,7 +47,7 @@
         function toggleLED(state) {
             var xhr = new XMLHttpRequest();
             // Thay thế 'your_esp8266_ip' bằng địa chỉ IP của ESP8266 của bạn
-            xhr.open("GET", "http://192.168.1.9/led/" + state, true);
+            xhr.open("GET", "https://192.168.1.9/led/" + state, true);
             xhr.onload = function () {
                 if (xhr.status == 200) {
                     var ledStatus = document.getElementById("ledStatus");
