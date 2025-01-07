@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Điều khiển LED</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        .button {
+            padding: 15px 25px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .button:active {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Điều khiển LED</h1>
+    <p>LED hiện tại: <span id="ledStatus">Đang tắt</span></p>
+    <button class="button" onclick="toggleLED('on')">Bật LED</button>
+    <button class="button" onclick="toggleLED('off')">Tắt LED</button>
+
+    <script>
+        function toggleLED(state) {
+            var xhr = new XMLHttpRequest();
+            // Thay thế 'your_esp8266_ip' bằng địa chỉ IP của ESP8266 của bạn
+            xhr.open("GET", "http://192.168.1.9/led/" + state, true);
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    var ledStatus = document.getElementById("ledStatus");
+                    ledStatus.textContent = (state === 'on') ? "Đang bật" : "Đang tắt";
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>
